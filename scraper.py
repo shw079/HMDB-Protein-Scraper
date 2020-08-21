@@ -5,6 +5,7 @@ from src.pquery import ProteinQuery
 
 def write_csv(records, out):
     with open(out, "w") as h:
+        h.write("HMDB_id,UniProt_id,name\n")
         for record in records:
             h.write(",".join(record))
             h.write("\n")

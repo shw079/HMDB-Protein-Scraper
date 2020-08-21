@@ -24,7 +24,7 @@ class ProteinQuery:
                 next = True
             elif '</div><div class="unearth-search-results unearth-protein-search-results">' in line:
                 # parse search results
-                matches = re.findall(">([a-zA-Z0-9_\\-\\(\\)/ ]+?)<", line)
+                matches = re.findall(">([a-zA-Z0-9_\\-\\(\\)/: ]+?)<", line)
                 i = 0
                 while i < len(matches):
                     if matches[i].startswith("HMDB"):

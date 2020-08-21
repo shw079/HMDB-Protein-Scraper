@@ -22,3 +22,4 @@ if __name__ == "__main__":
     query = ProteinQuery(args.k)
     query.parse()
     write_csv(query.res, args.o)
+    print("---Found {} records of {}---".format(len(query.res), args.k))

@@ -1,10 +1,11 @@
+from urllib.parse import quote
 from urllib.request import urlopen
 import re
 
 
 class ProteinQuery:
     def __init__(self, query):
-        self.query = query
+        self.query = quote(query)
         self._page = 1
         self._request = 'https://hmdb.ca/unearth/q?button=&query={}&searcher=proteins'.format(self.query)
         self.res = []
@@ -21,9 +22,9 @@ class ProteinQuery:
             line = line.decode("utf-8")
             if line.startswith('  <a rel="next"'):
                 next = True
-            elif line.startswith('</div><div class="unearth-search-results unearth-protein-search-results">'):
+            elif '</div><div class="unearth-search-results unearth-protein-search-results">' in line:
                 # parse search results
-                matches = re.findall(">([a-zA-Z0-9_\\- ]+?)<", line)
+                matches = re.findall(">([a-zA-Z0-9_\\-\\(\\)/ ]+?)<", line)
                 i = 0
                 while i < len(matches):
                     if matches[i].startswith("HMDB"):
